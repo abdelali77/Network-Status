@@ -1,49 +1,23 @@
-let wrapper = document.querySelector(".wrapper");
-let toast = document.querySelector(".toast");
-let wifiIcon = document.querySelector(".icon");
-let title = document.querySelector("span");
-let subTitle = document.querySelector("p");
-let closeIcon = document.querySelector(".close-icon");
+#!/usr/bin/env node
 
-window.onload = () => {
-  function ajax() {
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://jsonplaceholder.typicode.com/posts", true); //sending get request on this URL
-    xhr.onload = () => {
-      if (xhr.status == 200 && xhr.status < 300) {
-        toast.classList.remove("offline");
-        title.innerText = "You're online now";
-        subTitle.innerText = "Internet is connected.";
-        wifiIcon.innerHTML = '<i class="uil uil-wifi"></i>';
+import isOnline from 'is-online';
 
-        closeIcon.onclick = () => {
-          //hide toast notification on close icon click
-          wrapper.classList.add("hide");
-        };
+const resetColor = "\x1b[0m";
+const greenColor = "\x1b[32m";
+const redColor = "\x1b[31m";
 
-        setTimeout(() => {
-          //hide the toast notification automatically after 5 seconds
-          wrapper.classList.add("hide");
-        }, 5000);
-      } else {
-        offline(); //calling offline function if the passed url is not correct or returning 404 or other error
-      }
-    };
-    xhr.onerror = () => {
-      offline(); //calling offline function if the passed url is not correct or returning 404 or other error
-    };
-    xhr.send();
+async function checkInternetStatus() {
+  try {
+    const status = await isOnline()
+
+    if (status) {
+      console.log(greenColor + "🟢 You're Online" + resetColor);
+    } else {
+      console.log(redColor + "🔴 You're OffLine" + resetColor);
+    }
+  } catch (error) {
+    console.log('Error:', error.message)
   }
+}
 
-  function offline() {
-    wrapper.classList.remove("hide");
-    toast.classList.add("offline");
-    title.innerText = "You're offline now";
-    subTitle.innerText = "Internet is disconnected.";
-    wifiIcon.innerHTML = '<i class="uil uil-wifi-slash"></i>';
-  }
-
-  setInterval(() => {
-    ajax();
-  }, 100);
-};
+checkInternetStatus();
