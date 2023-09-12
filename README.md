@@ -14,6 +14,6 @@ To check the internet status, simply run the following command in your terminal
 ```bash
 user-status
 ```
-The program will use the is-online library to check whether the internet is connected or not and display the result
+The program will use the `is-online` library to check whether the internet is connected or not and display the result
 # Author
 **Abdelali**
