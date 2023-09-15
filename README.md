@@ -17,3 +17,5 @@ user-status
 The program will use the `is-online` library to check whether the internet is connected or not and display the result
 # Author
 **Abdelali**
+# License
+[LICENSE](LICENSE)
