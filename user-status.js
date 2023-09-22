@@ -6,18 +6,18 @@ const resetColor = "\x1b[0m";
 const greenColor = "\x1b[32m";
 const redColor = "\x1b[31m";
 
-async function checkInternetStatus() {
+async function checkInternetConnection () {
   try {
-    const status = await isOnline()
+    const isConnected = await isOnline()
 
-    if (status) {
+    if (isConnected) {
       console.log(greenColor + "🟢 You're Online" + resetColor);
     } else {
       console.log(redColor + "🔴 You're OffLine" + resetColor);
     }
   } catch (error) {
-    console.log('Error:', error.message)
+    console.log(`Error checking internet connection:`, error.message);
   }
 }
 
-checkInternetStatus();
+checkInternetConnection();
