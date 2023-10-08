@@ -19,5 +19,4 @@ async function checkInternetConnection () {
     console.log(`Error checking internet connection:`, error.message);
   }
 }
-
 checkInternetConnection();
